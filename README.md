@@ -27,16 +27,16 @@ Many teams start with neural networks… only to realize they need something mor
 
 ## 🌳 The Solution: Tree-Based Graph Learning (TREE-G)
 
-We use **TREE-G**, a non-neural method that applies decision tree logic to graph-structured data. It’s:
+Instead, use **TREE-G**, a non-neural method that applies decision tree logic to graph-structured data. It’s:
 
 * **Interpretable** — Shows *why* a prediction was made  
 * **Efficient** — Handles small and medium datasets without overfitting  
 * **Robust** — Works with missing sensor data (no imputation needed)  
 * **Precise** — Predicts *how much time* until the next machine state change  
 
-Each machine cycle is represented as a **graph** of sensors, with edges based on correlation and node and edge features derived from moving averages, clustering, and other methods.
+Each machine cycle was represented as a **graph** of sensors, with edges based on correlation and node and edge features derived from moving averages, clustering, and other methods.
 
-The model learns to **regress the time remaining until a state change**, offering clear lead time for intervention.
+The model learned to **regress the time remaining until a state change**, offering clear lead time for intervention.
 
 ---
 
@@ -53,10 +53,7 @@ The model learns to **regress the time remaining until a state change**, offerin
 
 ## 💡 Why This Matters
 
-This project bridges practical maintenance needs with real structure in data:
+This project bridged practical maintenance needs with real structure in data:
 
 * Forecasts *when* — not just *if* — a machine will change states  
-* Leverages graph dynamics, not just raw sensor values  
-* Gives teams insight they can trust and act on  
-
-Instead of “AI” that no one understands, this is **machine learning that works like an engineer thinks**.
+* Uses graph dynamics, not just flat raw sensor values
