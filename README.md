@@ -2,7 +2,7 @@
 
 ## ⚠️ The Problem
 
-Modern machines have dozens of sensors, producing complex and noisy data — but what operators really need is simple:
+Modern machines have countless sensors, producing complex and noisy data — but what operators really need is simple:
 
 > **“Tell me *when* the machine is about to change states — before it does.”**
 
