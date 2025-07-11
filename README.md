@@ -6,7 +6,7 @@ Modern machines have countless sensors, producing complex and noisy data — but
 
 > **“Tell me *when* the machine is about to change states — before it does.”**
 
-Whether it’s shifting from operational to recovery or heading toward a failure, timing matters. Acting too late means downtime. Acting too early wastes effort.
+Whether it’s shifting from operational to recovery or heading toward a failure, timing matters. Acting too late means downtime. Acting too early wastes effort and money (parts).
 
 Unfortunately, most systems rely on anomaly scores or rule-based alarms that are reactive, vague, or just plain noisy.
 
