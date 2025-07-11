@@ -51,9 +51,10 @@ The model learned to **regress the time remaining until a state change**, offeri
 
 ---
 
-## 💡 Why This Matters
+## 💡 Key Takeaways
 
-This project bridged practical maintenance needs with real structure in data:
+1. **Timing is everything:** Predicting *when* a machine will change states is more valuable than simple anomaly detection.
 
-* Forecasts *when* — not just *if* — a machine will change states  
-* Uses graph dynamics, not just flat raw sensor values
+2. **Interpretability matters:** TREE-G offers clear, explainable predictions, avoiding the black-box pitfalls of deep learning.
+
+3. **Graphs capture real relationships:** Modeling sensors as a graph (with edges based on correlation and dynamic features) reveals meaningful patterns missed by treating sensors independently.
