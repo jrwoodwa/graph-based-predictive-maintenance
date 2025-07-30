@@ -44,7 +44,7 @@ The model learned to **regress the time remaining until a state change**, offeri
 
 * Graph construction from time series sensor data  
 * Feature engineering on nodes, edges, and clusters  
-* Multiple clustering methods (Louvain, spectral, k-means)  
+* Clustering in networks (Label Propagation)  
 * Regression modeling with TREE-G  
 * Hyperparameter tuning and cross-validation  
 * Output: plain, interpretable forecasts of time-to-transition  
