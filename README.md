@@ -2,19 +2,17 @@
 
 ## ⚠️ The Problem
 
-Modern machines have countless sensors, producing complex and noisy data — but what operators really need is simple:
+Modern machines have countless sensors, producing complex and noisy data, but what operators really need is simple:
 
-> **“Tell me *when* the machine is about to change states — before it does.”**
+> **“Tell me *when* the machine is about to change states, before it does.”**
 
-Whether it’s shifting from operational to recovery or heading toward a failure, timing matters. Acting too late means downtime. Acting too early wastes effort and money (parts).
+Whether it’s shifting from operational to recovery or heading toward failure, timing matters. Acting too late means downtime. Acting too early wastes effort and money (parts).
 
 Unfortunately, most systems rely on anomaly scores or rule-based alarms that are reactive, vague, or just plain noisy.
 
----
-
 ## 🧠 The Trap: Deep Learning Isn't Always the Answer
 
-Neural networks — especially deep graph models — are powerful but often overkill:
+Neural networks, especially deep graph models, are powerful but often overkill:
 
 * **Hard to interpret** — Why did it predict failure? No one knows.  
 * **Data-hungry** — Struggle when you don’t have millions of labeled examples.  
@@ -22,8 +20,6 @@ Neural networks — especially deep graph models — are powerful but often over
 * **Difficult to debug** — You don’t know if it failed because of the graph structure, the features, or randomness.  
 
 Many teams start with neural networks… only to realize they need something more transparent, reliable, and lightweight.
-
----
 
 ## 🌳 The Solution: Tree-Based Graph Learning (TREE-G)
 
@@ -38,8 +34,6 @@ Each machine cycle was represented as a **graph** of sensors, with edges based o
 
 The model learned to **regress the time remaining until a state change**, offering clear lead time for intervention.
 
----
-
 ## 🛠️ What’s in the Project
 
 * Graph construction from time series sensor data  
@@ -48,8 +42,6 @@ The model learned to **regress the time remaining until a state change**, offeri
 * Regression modeling with TREE-G  
 * Hyperparameter tuning and cross-validation  
 * Output: plain, interpretable forecasts of time-to-transition  
-
----
 
 ## 💡 Key Takeaways
 
