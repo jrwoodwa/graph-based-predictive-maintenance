@@ -36,9 +36,24 @@ class BaseGradientBoostedTreeG():
 
         self.gbtreeg = None
 
-    def fit(self, X, y):
+    def fit(self, X, y, verbose=True):
         self.n_features_ = X[0].get_number_of_features
+
+        if verbose:  ## new inspecting
+            print(f"Starting fit: n_estimators={self.n_estimators}, learning_rate={self.learning_rate}")
+            print(f"Loss function: {self.loss}")
+        
         self.gbtreeg.fit(X, y)
+        
+        if verbose:  ## new inspecting
+            # Try to inspect per-tree predictions if available
+            try:
+                n_estimators, n_classes = self.gbtreeg.estimators_.shape
+                first_preds = self.predict_proba(X) if hasattr(self, "predict_proba") else self.predict(X)
+                print(f"Shape of first predictions: {first_preds.shape}")
+                print(f"First 5 predictions:\n{first_preds[:5]}")
+            except Exception as e:
+                print(f"Could not inspect per-tree predictions: {e}")
         return self
 
     def predict(self, X):
@@ -127,7 +142,7 @@ class GradientBoostedGraphTreeGRegressor(BaseGradientBoostedTreeG):
 
 class GradientBoostedGraphTreeGClassifier(BaseGradientBoostedTreeG):
 
-    def __init__(self, loss='ls', learning_rate=0.1, n_estimators=50, criterion='mse',
+    def __init__(self, loss='LogLoss', learning_rate=0.1, n_estimators=50, criterion='mse',
                  attention_set_limit=1, min_samples_split=2, min_samples_leaf=1,
                  max_walk_len=3, random_state=None, max_leaf_nodes=None, tol=1e-4):
         super().__init__(loss=loss, learning_rate=learning_rate, n_estimators=n_estimators,
@@ -147,7 +162,9 @@ class GradientBoostedGraphTreeGClassifier(BaseGradientBoostedTreeG):
                 min_leaf_size=self.min_samples_leaf,
             ),
             n_estimators=n_estimators,
-            learning_rate=learning_rate)
+            learning_rate=learning_rate
+            #,loss=starboost_loss.LogLoss()  # <-- added to try LogLoss instead of LS
+        )
 
     def predict_proba(self, X):
         return self.gbtreeg.predict_proba(X)
