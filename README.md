@@ -1,6 +1,7 @@
 # Village Water Pump Reliability: A Predictive Maintenance Case Study
 
 Modern machines produce big data from their minutely reporting sensors, to the point that modern solutions are required to address it.
+![Image](PostImages/Modern_Problems_Require_Modern_Solutions.jpg)
 
 This project uses a Kaggle dataset to explore hidden patterns in sensor data from a single water pump, aiming to minimize the stress associated with false positives or false negatives.
 
