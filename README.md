@@ -1,122 +1,52 @@
-# TREE-G: Decision Trees Contesting Graph Neural Networks
-TREE-Gs are decision trees specialized for graph data. They can be used for classificaiton, regression, vertex-labeling, graph-labeling, and edge-labeling.
-The model is described in the paper [TREE-G: Decision Trees Contesting Graph Neural Networks](https://arxiv.org/abs/2207.02760).
-TREE-G is highly recommended when learning over tabular features, and often outperform Graph Neural Networks on such tasks, as shown in the paper.
-The library is Scikit compatible.
+# Predictive Maintenance: Forecasting Machine State Changes from Sensor Graphs
 
-![example](two_graphs_example.png)
+## ⚠️ The Problem
 
-## Getting Started
-Install via pip:
-```
-$ pip install treeg
-```
+Modern machines have countless sensors, producing complex and noisy data, but what operators really need is simple:
 
-The dependencies can be found in requirements.txt file.
+> **“Tell me *when* the machine is about to change states, before it does.”**
 
-A simple example of using TREE-G for graph-level classification in a scikit fassion:
-```
-from treeg_gbdt import GradientBoostedTreeGClassifier, GradientBoostedTreeGRegressor
-from treeg.graph_treeg.data_formetter_graph_level import DataFormatter
-from treeg.graph_treeg.graph_data_graph_level import GraphData
-from experiments import datasets
-import numpy as np
-from sklearn.model_selection import train_test_split
+Whether it’s shifting from operational to recovery or heading toward failure, timing matters. Acting too late means downtime. Acting too early wastes effort and money (parts).
 
-dataset = datasets.TU_MUTAG()
+Unfortunately, most systems rely on anomaly scores or rule-based alarms that are reactive, vague, or just plain noisy.
 
-formatter = DataFormatter(GraphData)
-X, y = formatter.pyg_data_list_to_tree_graph_data_list(dataset)
-X, y = np.array(X), np.array(y)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
+## 🧠 The Trap: Deep Learning Isn't Always the Answer
 
-clf = GradientBoostedTreeGClassifier(n_estimators=20, learning_rate=0.1, max_depth=10, random_state=0).fit(X_train, y_train)
-score = clf.score(X_test, y_test)
-print('score: ' + str(score))
+Neural networks, especially deep graph models, are powerful but often overkill:
 
-feature_importance = clf.feature_importances_
-print('feature_importance: ' + str(feature_importance))
-```
+* **Hard to interpret** — Why did it predict failure? No one knows.  
+* **Data-hungry** — Struggle when you don’t have millions of labeled examples.  
+* **Black box behavior** — Not ideal in safety-critical or regulated environments.  
+* **Difficult to debug** — You don’t know if it failed because of the graph structure, the features, or randomness.  
 
-As shown in the file 'ensembles/gbdt/scikit_example.py'.
+Many teams start with neural networks… only to realize they need something more transparent, reliable, and lightweight.
 
-The ensembles folder contains a scikit compatible implementation of GBDTs with TREE-Gs estimators.
+## 🌳 The Solution: Tree-Based Graph Learning (TREE-G)
 
-### Reproducing the experiments from the paper
-The experiements in the paper used a  3rd party library for boosting called 'starboost'. This library is unfortunately not maintained and  currently have a bug.
-To fix the bug, please change the following in the library files:
-Lines 124 and 179 in boosting.py in the site-packages files of starboost should be changed to: 
-```
- y_pred[:, i] += self.learning_rate * direction[:, i]  
-```
+Instead, use **TREE-G**, a non-neural method that applies decision tree logic to graph-structured data. It’s:
 
-All the experiments can be found in the directory. 
-To run graph level experiments run:
-```
-$ python experiments/run_graph_experiments.py --exp_name=<dataset name>
-```
-The available datasets are:
-* mutag
-* proteins
-* nci1
-* dd
-* enzymes
-* imdbb
-* imdbm
-* ptcmr
-* mutagenicity
-* hiv
+* **Interpretable** — Shows *why* a prediction was made  
+* **Efficient** — Handles small and medium datasets without overfitting  
+* **Robust** — Works with missing sensor data (no imputation needed)  
+* **Precise** — Predicts *how much time* until the next machine state change  
 
-To run node level experiments run:
-```
-$ python experiments/run_node_experiments.py  --exp_name=<dataset name>
-```
-The available datasets are:
-* cora
-* citeseer
-* pubmed
-* arxiv
-* cornell
-* actor
-* country
+Each machine cycle was represented as a **graph** of sensors, with edges based on correlation and node and edge features derived from moving averages, clustering, and other methods.
 
-### Using Tree-Gs estimators
-If you wish to use one Tree-G estimator, the data should be in a treeg-graph format.
-To convert a pytorch-geometric graph to tree-graph, use for graph-level tasks:
-```
-from treeg.graph_treeg.graph_data_graph_level import GraphData
-import treeg.graph_treeg.formater_graph_level as formatter
+The model learned to **regress the time remaining until a state change**, offering clear lead time for intervention.
 
-dataset = <your pytorch-geometric dataset>
-formatter = DataFormatter(GraphData)
-X, y = formatter.pyg_data_list_to_tree_graph_data_list(dataset)
-X, y = np.array(X), np.array(y)
-```
+## 🛠️ What’s in the Project
 
-and for vertex-level tasks:
-```
-from treeg.graph_treeg.graph_data_node_level import GraphData
-import treeg.graph_treeg.data_formetter_node_level.py as formatter
+* Graph construction from time series sensor data  
+* Feature engineering on nodes, edges, and clusters  
+* Clustering in networks (Label Propagation)  
+* Regression modeling with TREE-G  
+* Hyperparameter tuning and cross-validation  
+* Output: plain, interpretable forecasts of time-to-transition  
 
-dataset = <your pytorch-geometric dataset>
-graph, y_nodes = formatter.transductive_pyg_graph_to_tree_graph(dataset)
-X = np.arange(dataset.data.num_nodes)
-X_train, X_valid, X_test = X[dataset.data.train_mask], X[dataset.data.val_mask], X[dataset.data.test_mask]
-y_train, y_valid, y_test = y_nodes[dataset.data.train_mask], y_nodes[dataset.data.val_mask], y_nodes[dataset.data.test_mask]
-```
+## 💡 Key Takeaways
 
-#### Cite
-If you use TREE-G, please cite:
-```
-@misc{bechlerspeicher2023treeg,
-      title={TREE-G: Decision Trees Contesting Graph Neural Networks}, 
-      author={Maya Bechler-Speicher and Amir Globerson and Ran Gilad-Bachrach},
-      year={2023},
-      eprint={2207.02760},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG}
-}
-```
+1. **Timing is everything:** Predicting *when* a machine will change states is more valuable than simple anomaly detection.
 
-### Contact
-For any questions, please contact Maya Bechler-Speicher: mayab4 at mail dot tau dot ac dot il.
+2. **Interpretability matters:** TREE-G offers clear, explainable predictions, avoiding the black-box pitfalls of deep learning.
+
+3. **Graphs capture real relationships:** Modeling sensors as a graph (with edges based on correlation and dynamic features) reveals meaningful patterns missed by treating sensors independently.
