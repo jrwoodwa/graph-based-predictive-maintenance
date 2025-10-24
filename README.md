@@ -8,7 +8,7 @@ This project uses a Kaggle dataset to explore hidden patterns in sensor data fro
 
 Curious how subtle machine signals can be turned into predictions? Let’s dive in.
 - `PredictiveMaintenance.ipynb` - contains all the work.
-  - `/TREE-G_Exploration` - extract this folder into the main directory to try TREE-G. It was folded here to keep things tidy. 
+  - `/TREE-G_Exploration` - extract this folder into the main directory to try TREE-G. It was folded here to keep things tidy. The code and original work belong to [Maya Bechler Speicher](https://github.com/mayabechlerspeicher/TREE-G).
 - `Report.pptx` - slides shown below for convenience (but the PPT is in higher resolution).
 
 ----
