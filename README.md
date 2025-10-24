@@ -1,4 +1,4 @@
-# # Village Water Pump Reliability: A Predictive Maintenance Case Study
+# Village Water Pump Reliability: A Predictive Maintenance Case Study
 
 Modern machines produce big data from their minutely reporting sensors, to the point that modern solutions are required to address it.
 
