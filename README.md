@@ -11,3 +11,14 @@ Curious how subtle machine signals can be turned into predictions? Let’s dive 
 ## Slides
 
 ![Slide1](PostImages/1.png)
+![Slide2](PostImages/2.png)
+![Slide3](PostImages/3.png)
+![Slide4](PostImages/4.png)
+![Slide5](PostImages/5.png)
+![Slide6](PostImages/6.png)
+![Slide7](PostImages/7.png)
+![Slide8](PostImages/8.png)
+![Slide9](PostImages/9.png)
+![Slide10](PostImages/10.png)
+![Slide11](PostImages/11.png)
+![Slide12](PostImages/12.png)
