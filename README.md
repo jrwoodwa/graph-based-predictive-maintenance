@@ -1,4 +1,5 @@
-# Village Water Pump Reliability: A Predictive Maintenance Case Study
+# Village Water Pump Reliability: 
+# A Predictive Maintenance Case Study
 
 ![Image](PostImages/Modern_Problems_Require_Modern_Solutions.jpg)
 
